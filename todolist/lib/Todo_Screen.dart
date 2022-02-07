@@ -13,7 +13,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     return (Scaffold(
         appBar: AppBar(
-          title: const Text(' App for the new branche '),
+          title: const Text(' todo list App  '),
         ),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
