@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/component.dart/form.dart';
 import 'package:todolist/layout/ArchvedTaskScreen.dart';
 import 'package:todolist/layout/NewDoneTaskScreen.dart';
 import 'package:todolist/layout/NewTaskScreen.dart';
@@ -13,6 +14,9 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   int curentIndex = 0;
+  var ScaffoldKey = GlobalKey<ScaffoldState>();
+  var isbottumsheetshow = false;
+  IconData buttomicon = Icons.add;
   // ignore: non_constant_identifier_names
   List<Widget> Screens = [
     const NewTaskScreen(),
@@ -29,15 +33,29 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
+        key: ScaffoldKey,
         appBar: AppBar(
           title: const Text(' todo list App  '),
         ),
         body: Screens[curentIndex],
         // ignore: prefer_const_constructors
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: insertdatabase,
-        ),
+            child: Icon(buttomicon),
+            onPressed: () {
+              if (isbottumsheetshow) {
+                Navigator.pop(context);
+                isbottumsheetshow = false;
+                setState(() {
+                  buttomicon = Icons.edit;
+                });
+              } else {
+                ScaffoldKey.currentState?.showBottomSheet((context) => form());
+                isbottumsheetshow = true;
+                setState(() {
+                  buttomicon = Icons.add;
+                });
+              }
+            }),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: curentIndex,
