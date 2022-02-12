@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
 Database? db;
@@ -17,7 +18,7 @@ void createdatabase() async {
       print("error while creating table ");
     });
   }, onOpen: (db) {
-    print("data base opened ");
+    getdata(db);
   });
 }
 
@@ -36,4 +37,10 @@ Future insertdatabase({
       print("error while inserting values ");
     });
   });
+}
+
+void getdata(Database db) async {
+  print("database  ");
+  List<Map> tasks = await db.rawQuery('SELECT * FROM task');
+  print("tasks =$tasks");
 }
