@@ -130,25 +130,18 @@ Widget form() {
                     primary: Colors.blue,
                     backgroundColor: Colors.grey[400],
                   ),
-                  child: Text("add "),
+                  child: const Text("add "),
                   onPressed: () {
                     if (formkey.currentState!.validate()) {
-                      print("yes you can ");
+                      print("insert");
                       insertdatabase(
                               title: titlecontroller.text,
                               date: datecontroller.text,
                               time: timecontroller.text)
-                          .then((value) {
-                        print("inserted succesfully ");
-                        print(
-                            "title=${titlecontroller.text}, \n date =${datecontroller.text} \n time  =${timecontroller.text} ");
-                      }).catchError(
-                        (Error) {
-                          print(" error while insert ");
-                        },
-                      );
+                          .catchError((Error) {
+                        print(Error.toString());
+                      });
                     }
-                    ;
                   })
             ],
           ),
